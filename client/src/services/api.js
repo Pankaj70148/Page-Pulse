@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Use import.meta.env for Vite
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const apiClient = axios.create({
@@ -9,6 +10,18 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 });
+
+// Add request interceptor to handle CORS
+apiClient.interceptors.request.use(
+  config => {
+    // Remove trailing slash from URL if present
+    if (config.url && config.url.endsWith('/')) {
+      config.url = config.url.slice(0, -1);
+    }
+    return config;
+  },
+  error => Promise.reject(error)
+);
 
 export const auditUrl = async (url) => {
   try {
@@ -21,10 +34,8 @@ export const auditUrl = async (url) => {
     return response.data.data;
   } catch (error) {
     if (error.response) {
-      // Server responded with error
       throw new Error(error.response.data.error || 'Server error occurred');
     } else if (error.request) {
-      // Request made but no response
       throw new Error('Could not reach the server. Please check your connection.');
     } else {
       throw error;

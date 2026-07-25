@@ -1,15 +1,16 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, test, expect, vi, beforeEach } from 'vitest';
 import '@testing-library/jest-dom';
 import App from '../App';
 import { auditUrl } from '../services/api';
 
 // Mock the API
-jest.mock('../services/api');
+vi.mock('../services/api');
 
 describe('App Component Tests', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('should render the application header', () => {
