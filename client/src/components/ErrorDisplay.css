@@ -1,0 +1,29 @@
+.error-display {
+  display: flex;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: #fff3f3;
+  border-radius: 12px;
+  border: 1px solid #fcc;
+  margin: 1rem 0;
+}
+
+.error-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.error-content h3 {
+  color: #d32f2f;
+  margin-bottom: 0.5rem;
+}
+
+.error-content p {
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.error-hint {
+  font-size: 0.9rem;
+  color: #888 !important;
+}
